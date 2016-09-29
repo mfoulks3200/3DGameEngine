@@ -25,11 +25,11 @@ public class TestGame extends Game
 	public void Init()
 	{
 		Mesh mesh = new Mesh("plane3.obj");
-		Material material2 = new Material(new Texture("bricks.jpg"), 1, 8,
-			new Texture("bricks_normal.jpg"), new Texture("bricks_disp.png"), 0.03f, -0.5f);
+		Material material2 = new Material(new Texture("stones/StonesBeach002_COL_VAR1_3K.jpg"), 1, 8,
+			new Texture("stones/StonesBeach002_NRM_3K.jpg"), new Texture("stones/StonesBeach002_DISP_3K.jpg"), 0.03f, -0.5f);
 
-		Material material = new Material(new Texture("bricks2.jpg"), 1, 8,
-				new Texture("bricks2_normal.png"), new Texture("bricks2_disp.jpg"), 0.04f, -1.0f);
+		Material material = new Material(new Texture("stones/StonesBeach002_COL_VAR1_3K.jpg"), 0.5f, 4,
+				new Texture("stones/StonesBeach002_NRM_3K.jpg"), new Texture("stones/StonesBeach002_DISP_3K.jpg"), 0.04f, -1.0f);
 
 		Mesh tempMesh = new Mesh("monkey3.obj");
 
@@ -40,7 +40,7 @@ public class TestGame extends Game
 		planeObject.GetTransform().GetPos().Set(0, -1, 5);
 
 		GameObject directionalLightObject = new GameObject();
-		DirectionalLight directionalLight = new DirectionalLight(new Vector3f(0,0,1), 0.4f);
+		DirectionalLight directionalLight = new DirectionalLight(new Vector3f(1,1,1), 0.4f);
 
 		directionalLightObject.AddComponent(directionalLight);
 
@@ -58,14 +58,14 @@ public class TestGame extends Game
 
 		AddObject(planeObject);
 		AddObject(directionalLightObject);
-		AddObject(pointLightObject);
-		AddObject(spotLightObject);
+		//AddObject(pointLightObject);
+		//AddObject(spotLightObject);
 
 		GameObject testMesh3 = new GameObject().AddComponent(new LookAtComponent()).AddComponent(new MeshRenderer(tempMesh, material));
 
 		AddObject(
 				//AddObject(
-				new GameObject().AddComponent(new FreeLook(0.5f)).AddComponent(new FreeMove(10.0f))
+				new GameObject().AddComponent(new FreeLook(0.3f)).AddComponent(new FreeMove(10.0f))
 						.AddComponent(new Camera(new Matrix4f().InitPerspective((float) Math.toRadians(70.0f),
 								(float) Window.GetWidth() / (float) Window.GetHeight(), 0.01f, 1000.0f))));
 

@@ -22,8 +22,8 @@ public class Main
 {
 	public static void main(String[] args)
 	{
-		CoreEngine engine = new CoreEngine(800, 600, 60, new TestGame());
-		engine.CreateWindow("3D Game Engine");
+		CoreEngine engine = new CoreEngine(1920, 1080, 60, new TestGame());
+		engine.CreateWindow("Imagine Engine Editor");
 		engine.Start();
 	}
 }

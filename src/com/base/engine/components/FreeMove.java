@@ -26,19 +26,23 @@ public class FreeMove extends GameComponent
 	private int   m_backKey;
 	private int   m_leftKey;
 	private int   m_rightKey;
+	private int   m_upKey;
+	private int   m_downKey;
 
 	public FreeMove(float speed)
 	{
-		this(speed, Input.KEY_W, Input.KEY_S, Input.KEY_A, Input.KEY_D);
+		this(speed, Input.KEY_W, Input.KEY_S, Input.KEY_A, Input.KEY_D, Input.KEY_Q,Input.KEY_E);
 	}
 
-	public FreeMove(float speed, int forwardKey, int backKey, int leftKey, int rightKey)
+	public FreeMove(float speed, int forwardKey, int backKey, int leftKey, int rightKey, int upKey, int downKey)
 	{
 		this.m_speed = speed;
 		this.m_forwardKey = forwardKey;
 		this.m_backKey = backKey;
 		this.m_leftKey = leftKey;
 		this.m_rightKey = rightKey;
+		this.m_upKey = upKey;
+		this.m_downKey = downKey;
 	}
 
 	@Override
@@ -54,6 +58,11 @@ public class FreeMove extends GameComponent
 			Move(GetTransform().GetRot().GetLeft(), movAmt);
 		if(Input.GetKey(m_rightKey))
 			Move(GetTransform().GetRot().GetRight(), movAmt);
+
+		if(Input.GetKey(m_upKey))
+			Move(GetTransform().GetRot().GetUp(), -movAmt);
+		if(Input.GetKey(m_downKey))
+			Move(GetTransform().GetRot().GetUp(),movAmt);
 	}
 
 	private void Move(Vector3f dir, float amt)
