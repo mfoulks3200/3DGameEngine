@@ -25,19 +25,23 @@ public class FreeLook extends GameComponent
 {
 	private static final Vector3f Y_AXIS = new Vector3f(0,1,0);
 
-	private boolean m_mouseLocked = false;
-	private float   m_sensitivity;
-	private int     m_unlockMouseKey;
+	private boolean  m_mouseLocked = false;
+	private boolean  m_editorMode = false;
+	private float    m_sensitivity;
+	private int      m_unlockMouseKey;
+	private Vector2f m_previousMousePos;
 
 	public FreeLook(float sensitivity)
 	{
-		this(sensitivity, Input.KEY_ESCAPE);
+		this(false, sensitivity, Input.KEY_ESCAPE);
 	}
 
-	public FreeLook(float sensitivity, int unlockMouseKey)
+	public FreeLook(boolean editorMode, float sensitivity, int unlockMouseKey)
 	{
+		this.m_editorMode = editorMode;
 		this.m_sensitivity = sensitivity;
 		this.m_unlockMouseKey = unlockMouseKey;
+		m_previousMousePos = new Vector2f(0,0);
 	}
 
 	@Override
@@ -71,6 +75,20 @@ public class FreeLook extends GameComponent
 
 			if(rotY || rotX)
 				Input.SetMousePosition(centerPosition);
+		}
+		if(m_editorMode && Input.GetMouse(m_unlockMouseKey)){	
+			
+			Vector2f currPos = Input.GetMousePosition().Sub(centerPosition);
+			Vector2f deltaPos = currPos.Sub(m_previousMousePos);
+			m_previousMousePos = Input.GetMousePosition().Sub(centerPosition);
+
+			boolean rotY = deltaPos.GetX() != 0;
+			boolean rotX = deltaPos.GetY() != 0;
+
+			if(rotY)
+				GetTransform().Rotate(Y_AXIS, (float) Math.toRadians(deltaPos.GetX() * m_sensitivity));
+			if(rotX)
+				GetTransform().Rotate(GetTransform().GetRot().GetRight(), (float) Math.toRadians(-deltaPos.GetY() * m_sensitivity));
 		}
 	}
 }

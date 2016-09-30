@@ -65,7 +65,7 @@ public class TestGame extends Game
 
 		AddObject(
 				//AddObject(
-				new GameObject().AddComponent(new FreeLook(0.3f)).AddComponent(new FreeMove(10.0f))
+				new GameObject().AddComponent(new FreeLook(true, 0.3f, 1)).AddComponent(new FreeMove(10.0f))
 						.AddComponent(new Camera(new Matrix4f().InitPerspective((float) Math.toRadians(70.0f),
 								(float) Window.GetWidth() / (float) Window.GetHeight(), 0.01f, 1000.0f))));
 

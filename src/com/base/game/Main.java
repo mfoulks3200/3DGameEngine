@@ -22,7 +22,7 @@ public class Main
 {
 	public static void main(String[] args)
 	{
-		CoreEngine engine = new CoreEngine(1920, 1080, 60, new TestGame());
+		CoreEngine engine = new CoreEngine(1280, 720, 60, new TestGame());
 		engine.CreateWindow("Imagine Engine Editor");
 		engine.Start();
 	}
